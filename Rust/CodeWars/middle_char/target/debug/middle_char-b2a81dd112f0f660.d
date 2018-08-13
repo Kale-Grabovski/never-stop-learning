@@ -1,1 +1,0 @@
-/Users/aleksandr.markin/Projects/never-stop-learning/Rust/CodeWars/middle_char/target/debug/middle_char-b2a81dd112f0f660.dSYM: /Users/aleksandr.markin/Projects/never-stop-learning/Rust/CodeWars/middle_char/src/main.rs
