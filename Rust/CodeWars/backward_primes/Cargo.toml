@@ -1,0 +1,6 @@
+[package]
+name = "backward_primes"
+version = "0.1.0"
+authors = ["aleksandr.markin <aleksandr.markin@iqoption.com>"]
+
+[dependencies]
