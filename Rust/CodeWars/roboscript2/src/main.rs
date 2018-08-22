@@ -1,0 +1,73 @@
+extern crate regex;
+use regex::{Regex};
+
+fn get_dims(s: &str) -> (i32, i32) {
+	let re = Regex::new(r"([FLR])(\d*)").unwrap();
+	let mut angle = 0;
+	let mut offset = (0, 0); // (right, down)
+	let mut max_offset = (0, 0, 0, 0); // (right, down, left, top)
+
+	for r in re.captures_iter(s) {
+		let st: &str = &r[1];
+		let c: u32 = match &r[2] {
+			"" => 1,
+			_  => (&r[2]).parse().unwrap(), 
+		};
+
+		match st {
+			"F" => {
+				let direction = match angle {
+					90  | -270 => (0, 1),
+					180 | -180 => (-1, 0),
+					270 | -90  => (0, -1),
+					_          => (1, 0),
+				};
+
+				println!("{:?} {} {} {}", direction, c, offset.0, offset.1);
+
+				for _ in 0..c {
+					offset.0 += direction.0;
+					offset.1 += direction.1;
+				}
+
+				if offset.0 > max_offset.0 {
+					max_offset.0 = offset.0;
+				}
+				if offset.0 < max_offset.2 {
+					max_offset.2 = offset.0;
+				}
+				if offset.1 > max_offset.1 {
+					max_offset.1 = offset.1;
+				}
+				if offset.1 < max_offset.3 {
+					max_offset.3 = offset.1;
+				}
+			},
+			"L" => {
+				for _ in 0..c {
+					angle -= 90;
+					if angle == -360 {
+						angle = 0;
+					}
+				}
+			}
+			"R" => {
+				for _ in 0..c {
+					angle += 90;
+					if angle == 360 {
+						angle = 0;
+					}
+				}
+			}
+			_ => (),
+		};
+	}
+	
+	println!("{:?}", offset);
+
+	(((max_offset.0 - max_offset.2) as i32).abs(), ((max_offset.1 - max_offset.3) as i32).abs())
+}
+
+fn main() {
+	println!("{:?}", get_dims("LF5RF3RF3RF7"));
+}

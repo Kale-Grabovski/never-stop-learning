@@ -61,8 +61,7 @@ pub fn highlight(code: &str) -> String {
 ///pub fn highlight(code: &str) -> String {
 ///    let re = Regex::new(r"F+|L+|R+|\d+").unwrap();
 ///    re.replace_all(code, |c: &Captures| match c[0].chars().next().unwrap() {
-///        'F' => format!(r#"<span style="color: pink">{}</span>"#, &c[0]),
-///        'L' => format!(r#"<span style="color: red">{}</span>"#, &c[0]),
+///        'F' => format!(r#"<span style="color: red">{}</span>"#, &c[0]),
 ///        'R' => format!(r#"<span style="color: green">{}</span>"#, &c[0]),
 ///        _ => format!(r#"<span style="color: orange">{}</span>"#, &c[0]),
 ///    }).to_string()
