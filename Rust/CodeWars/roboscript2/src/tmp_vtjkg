@@ -1,5 +1,6 @@
 extern crate regex;
 use regex::{Regex};
+j
 
 fn get_dims(s: &str) -> (i32, i32) {
 	let re = Regex::new(r"([FLR])(\d*)").unwrap();
@@ -22,6 +23,8 @@ fn get_dims(s: &str) -> (i32, i32) {
 					270 | -90  => (0, -1),
 					_          => (1, 0),
 				};
+
+				println!("{:?} {} {} {}", direction, c, offset.0, offset.1);
 
 				for _ in 0..c {
 					offset.0 += direction.0;
@@ -60,18 +63,10 @@ fn get_dims(s: &str) -> (i32, i32) {
 			_ => (),
 		};
 	}
+	
+	println!("{:?}", offset);
 
-	let dims = (((max_offset.0 - max_offset.2) as i32).abs() * 3, ((max_offset.1 - max_offset.3) as i32).abs() * 3);
-	let mut state: &[&[char]];
-
-	for i in 0..dims.0 {
-		for k in 0..dims.1 {
-			print!("{}", '-');
-		}
-		println!("");
-	}
-
-	dims
+	(((max_offset.0 - max_offset.2) as i32).abs(), ((max_offset.1 - max_offset.3) as i32).abs())
 }
 
 fn main() {

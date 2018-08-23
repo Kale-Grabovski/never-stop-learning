@@ -62,14 +62,7 @@ fn get_dims(s: &str) -> (i32, i32) {
 	}
 
 	let dims = (((max_offset.0 - max_offset.2) as i32).abs() * 3, ((max_offset.1 - max_offset.3) as i32).abs() * 3);
-	let mut state: &[&[char]];
-
-	for i in 0..dims.0 {
-		for k in 0..dims.1 {
-			print!("{}", '-');
-		}
-		println!("");
-	}
+	let state = [mut [mut 0u8, ..dims.1j], ..4];
 
 	dims
 }
