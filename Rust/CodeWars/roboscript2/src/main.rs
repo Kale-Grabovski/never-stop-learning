@@ -1,6 +1,11 @@
 extern crate regex;
 use regex::{Regex};
 
+fn print_state(state: &Vec<Vec<char>>) {
+	let x: Vec<String> = state.iter().map(|x| x.into_iter().collect()).collect();
+	println!("{}", x.join("\n"));
+}
+
 fn get_dims(s: &str) -> String {
 	if s == "" {
 		return "*".to_string();
@@ -10,27 +15,32 @@ fn get_dims(s: &str) -> String {
 	let mut angle = 0;
 	let mut offset = (0, 0); // (right, down)
 	let mut max_offset = (0, 0, 0, 0); // (right, down, left, top)
+	let mut first_direction: (i32, i32) = (0, 0);
 
-	for r in re.captures_iter(s) {
+	for (i, r) in re.captures_iter(s).enumerate() {
 		let st: &str = &r[1];
-		let c: u32 = match &r[2] {
+		let c: i32 = match &r[2] {
 			"" => 1,
 			_  => (&r[2]).parse().unwrap(), 
 		};
 
 		match st {
 			"F" => {
-				let direction = match angle {
+				let direction: (i32, i32) = match angle {
 					90  | -270 => (0, 1),
 					180 | -180 => (-1, 0),
 					270 | -90  => (0, -1),
 					_          => (1, 0),
 				};
 
-				for _ in 0..c {
+				if i == 0 {
+					first_direction = direction;
 					offset.0 += direction.0;
 					offset.1 += direction.1;
 				}
+
+				offset.0 += direction.0 * c;
+				offset.1 += direction.1 * c;
 
 				if offset.0 > max_offset.0 {
 					max_offset.0 = offset.0;
@@ -65,16 +75,20 @@ fn get_dims(s: &str) -> String {
 		};
 	}
 
-	let dims = (((max_offset.0 - max_offset.2) as i32).abs(), ((max_offset.1 - max_offset.3) as i32).abs());
-	let mut state = vec![vec!['-'; (dims.1 * 3) as usize]; (dims.0 * 3) as usize];
+	let dims: (usize, usize) = ((max_offset.1 - max_offset.3).abs() as usize, (max_offset.0 - max_offset.2).abs() as usize);
+	let mut state = vec![vec!['-'; (dims.0 * 3) as usize]; (dims.1 * 3) as usize];
 
 	let mut angle = 0;
-	let mut coord = (dims.0 + 1, dims.1 + 1);
+	let mut coord: (usize, usize) = (dims.0, dims.1);
+
+	state[coord.1 as usize][coord.0 as usize] = '*';
+	coord.0 += first_direction.0 as usize;
+	coord.1 += first_direction.1 as usize;
 	state[coord.1 as usize][coord.0 as usize] = '*';
 
 	for r in re.captures_iter(s) {
 		let st: &str = &r[1];
-		let c: u32 = match &r[2] {
+		let c: i32 = match &r[2] {
 			"" => 1,
 			_  => (&r[2]).parse().unwrap(), 
 		};
@@ -88,11 +102,9 @@ fn get_dims(s: &str) -> String {
 					_          => (1, 0),
 				};
 
-				for _ in 0..c {
-					coord.0 += direction.0;
-					coord.1 += direction.1;
-					state[coord.1 as usize][coord.0 as usize] = '*';
-				}
+				coord.0 += (direction.0 * c) as usize;
+				coord.1 += (direction.1 * c) as usize;
+				state[coord.1 as usize][coord.0 as usize] = '*';
 			},
 			"L" => {
 				for _ in 0..c {
@@ -114,31 +126,22 @@ fn get_dims(s: &str) -> String {
 		};
 	}
 
-	let mut row = 0;
-	'outer: for x in 0..dims.0 * 3 {
-		for u in 0..dims.1 * 3 {
-			if state[x as usize][u as usize] == '*' {
-				row = x;
-				break 'outer;
-			}
-		}
-	}
-
-	let mut col = 0;
-	'out: for u in 0..dims.1 * 3 {
-		for x in 0..dims.0 * 3 {
-			if state[x as usize][u as usize] == '*' {
-				col = u;
-				break 'out;
-			}
-		}
-	}
+	let tt: Vec<Vec<char>> = state.iter()
+		.filter(|&x| x.iter()
+			.filter(|&t| *t != '-')
+			.map(|x| *x)
+			.collect::<Vec<char>>()
+			.into_iter()
+			.collect::<String>() != ""
+		)
+		.map(|&x| *x)
+		.collect();
+	print_state(&tt);
 
 	let mut result = vec![vec![' '; (dims.0 + 1) as usize]; (dims.1 + 1) as usize];
-	for r in 0..dims.1 + 1 {
-		for c in 0..dims.0 + 1 {
-			result[r as usize][c as usize] = state[(r + row) as usize][(c + col) as usize];
-			println!("{} {}", r + row, c + col);
+	for r in 0..dims.0 {
+		for c in 0..dims.1 {
+			//println!("{} {}", r + row, c + col);
 		}
 	}
 
@@ -148,5 +151,5 @@ fn get_dims(s: &str) -> String {
 
 fn main() {
 	//println!("{}", get_dims("LF5RF3RF3RF7"));
-	println!("{}", get_dims("F"));
+	println!("{}", get_dims("FFRFFF"));
 }
