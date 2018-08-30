@@ -1,11 +1,6 @@
 extern crate regex;
 use regex::{Regex};
 
-fn print_state(state: &Vec<Vec<char>>) {
-	let x: Vec<String> = state.iter().map(|x| x.into_iter().collect()).collect();
-	println!("{}", x.join("\n"));
-}
-
 fn get_dims(s: &str) -> String {
 	if s == "" {
 		return "*".to_string();
@@ -126,30 +121,57 @@ fn get_dims(s: &str) -> String {
 		};
 	}
 
-	let tt: Vec<Vec<char>> = state.iter()
-		.filter(|&x| x.iter()
-			.filter(|&t| *t != '-')
-			.map(|x| *x)
-			.collect::<Vec<char>>()
-			.into_iter()
-			.collect::<String>() != ""
-		)
-		.map(|&x| *x)
-		.collect();
-	print_state(&tt);
+	let mut rows = vec![];
+	for (r, row) in (&state).iter().enumerate() {
+		let mut is = true;
+		for i in row {
+			if *i != '-' {
+				is = false;
+			}
+		}
 
-	let mut result = vec![vec![' '; (dims.0 + 1) as usize]; (dims.1 + 1) as usize];
-	for r in 0..dims.0 {
-		for c in 0..dims.1 {
-			//println!("{} {}", r + row, c + col);
+		if is {
+			rows.push(r);
+		}
+	}
+	for r in rows {
+		for i in 0..state[0].len() {
+			state[r][i] = '$';
 		}
 	}
 
-	let x: Vec<String> = result.iter().map(|x| x.into_iter().collect()).collect();
-	x.join("\n")
+	let mut cols = vec![];
+	for c in 0..state[0].len() {
+		let mut is = true;
+		for i in 0..state.len() {
+			if state[i][c] != '-' && state[i][c] != '$' {
+				is = false;
+			}
+		}
+
+		if is {
+			cols.push(c);
+		}
+	}
+	for c in cols {
+		for r in 0..state.len() {
+			state[r][c] = '$';
+		}
+	}
+
+	let mut res = String::new();
+	let result = state.iter().flat_map(|x| x).filter(|&x| *x != '$').collect::<Vec<&char>>();
+	for c in result.chunks(dims.1 + 1).collect::<Vec<_>>() {
+		for i in c {
+			res.push(**i);
+		} 
+		res.push('\n');
+	}
+
+	res.trim().to_string()
 }
 
 fn main() {
 	//println!("{}", get_dims("LF5RF3RF3RF7"));
-	println!("{}", get_dims("FFRFFF"));
+	println!("{}", get_dims("FFRF"));
 }
