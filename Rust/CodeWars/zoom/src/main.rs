@@ -1,5 +1,5 @@
 fn main() {
-    println!("{}", zoom(13));
+    println!("{}", zoom(103));
 }
 
 fn zoom(n: i32) -> String {
