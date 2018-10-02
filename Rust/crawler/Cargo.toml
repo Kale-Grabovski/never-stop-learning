@@ -1,0 +1,7 @@
+[package]
+name = "crawler"
+version = "0.1.0"
+authors = ["kentavr"]
+
+[dependencies]
+curl = "0.4.8"
