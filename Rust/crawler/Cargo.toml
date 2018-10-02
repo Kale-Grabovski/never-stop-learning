@@ -5,3 +5,4 @@ authors = ["kentavr"]
 
 [dependencies]
 curl = "0.4.8"
+regex = "*"
