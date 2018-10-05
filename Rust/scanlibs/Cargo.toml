@@ -6,3 +6,5 @@ authors = ["kentavr"]
 [dependencies]
 curl = "0.4.8"
 regex = "*"
+telegram-bot = "0.6"
+tokio-core = "0.1"

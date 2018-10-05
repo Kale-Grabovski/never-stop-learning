@@ -1,10 +1,17 @@
 extern crate curl;
 extern crate regex;
+extern crate telegram_bot;
+extern crate tokio_core;
 
 use curl::easy::Easy;
 use regex::Regex;
 
-fn main() {
+use std::env;
+
+use tokio_core::reactor::Core;
+use telegram_bot::{Api, GetMe};
+
+fn main2() {
     let mut easy = Easy::new();
 
     easy.url("https://scanlibs.com/").unwrap();
@@ -22,4 +29,15 @@ fn main() {
         Ok(data.len())
     }).unwrap();
     easy.perform().unwrap();
+}
+
+fn main() {
+    let token = "";
+
+    let mut core = Core::new().unwrap();
+
+    let api = Api::configure(token).build(core.handle()).unwrap();
+    let future = api.send(GetMe);
+
+    println!("{:?}", core.run(future))
 }
