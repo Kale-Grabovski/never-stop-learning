@@ -1,0 +1,10 @@
+[package]
+name = "wasm"
+version = "0.1.0"
+authors = ["aleksandr.markin <aleksandr.markin@iqoption.com>"]
+edition = "2018"
+
+[dependencies]
+
+[lib]
+crate-type = ["cdylib"]
