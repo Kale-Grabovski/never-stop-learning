@@ -1,7 +1,7 @@
 [package]
 name = "binance"
 version = "0.1.0"
-authors = ["aleksandr.markin <aleksandr.markin@iqoption.com>"]
+authors = ["ax <ax@xxx.xxx>"]
 edition = "2018"
 
 [dependencies]
