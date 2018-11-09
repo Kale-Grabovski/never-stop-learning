@@ -3,31 +3,41 @@ extern crate hmac;
 extern crate sha2;
 extern crate hex;
 extern crate serde;
-
-#[macro_use]
 extern crate serde_derive;
 
+use serde_derive::{Serialize, Deserialize};
 use sha2::Sha256;
 use hmac::{Hmac, Mac};
 use std::time::{SystemTime, UNIX_EPOCH};
 use reqwest::header;
+use std::env;
 
-#[derive(Serialize, Deserialize, Debug)]
-struct Balance {
+#[derive(Serialize, Deserialize)]
+struct BalanceRaw {
     asset: String,
     free: String,
     locked: String,
 }
-#[derive(Serialize, Deserialize, Debug)]
-struct Balances {
-    balances: Vec<Balance>,
+#[derive(Serialize, Deserialize)]
+struct BalancesRaw {
+    balances: Vec<BalanceRaw>,
+}
+#[derive(Debug)]
+struct Balance{
+    asset: String,
+    free: f32,
+    locked: f32,
 }
 
 type HmacSha256 = Hmac<Sha256>;
 
 fn format_request(path: &str, query: &str) -> String {
     let uri = "https://api.binance.com/api/v3".to_string();
-    let secret = "bM04FLpBLyftHUXajCGDs8i3yqGcUyBLkv1PtxK6W8ZzZw3OXpIv9ACWtOsgy5Bs";
+    let secret = match env::var("BINANCE_SECRET") {
+        Ok(val) => val,
+        Err(_) => panic!("BINANCE_SECRET env is not set"),
+    };
+
     let mut mac = HmacSha256::new_varkey(secret.as_bytes()).expect("HMAC error");
     let start = SystemTime::now();
     let ts = start.duration_since(UNIX_EPOCH).expect("Time error");
@@ -50,7 +60,11 @@ fn format_request(path: &str, query: &str) -> String {
 
 fn get_response(path: &str, query: &str) -> String {
     let mut headers = header::HeaderMap::new();
-    headers.insert("X-MBX-APIKEY", header::HeaderValue::from_str("VQlJwQ5dr3BtXHcmE9ZPWNwJVibyuRnlc39xDHnSmegFHgvLTtziLgBzTApdGSr9").unwrap());
+    let key = match env::var("BINANCE_KEY") {
+        Ok(val) => val,
+        Err(_) => panic!("BINANCE_KEY env is not set"),
+    };
+    headers.insert("X-MBX-APIKEY", header::HeaderValue::from_str(&key.to_owned()).unwrap());
 
     let client = reqwest::Client::builder()
         .default_headers(headers)
@@ -65,14 +79,22 @@ fn get_response(path: &str, query: &str) -> String {
         .unwrap()
 }
 
-fn get_balances<'a>() -> Vec<&'a Balance> {
-    let mut balances: Vec<&Balance> = vec![];
-
+fn get_balances() -> Vec<Balance> {
     let body = get_response("/account", "");
+    let res: BalancesRaw = serde_json::from_str(&body).unwrap();
 
-    let res: Balances = serde_json::from_str(&body).unwrap();
-    for d in res.balances.iter() {
-        balances.push(d);
+    let mut balances: Vec<Balance> = vec![];
+    for d in res.balances {
+        let free = d.free.parse::<f32>().unwrap();
+        let locked = d.locked.parse::<f32>().unwrap();
+
+        if free > 0.0 || locked > 0.0 {
+            balances.push(Balance{
+                asset: d.asset,
+                free: free,
+                locked: locked,
+            });
+        }
     }
 
     balances
@@ -80,5 +102,7 @@ fn get_balances<'a>() -> Vec<&'a Balance> {
 
 fn main() {
     let balances = get_balances();
-    println!("{:?}", balances);
+    for b in balances {
+        println!("{:?}", b);
+    }
 }
