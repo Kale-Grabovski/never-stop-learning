@@ -29,10 +29,20 @@ struct Balance{
     locked: f32,
 }
 
+#[derive(Serialize, Deserialize)]
+struct TickerRaw{
+    symbol: String,
+    price: String,
+}
+#[derive(Debug)]
+struct Ticker{
+    symbol: String,
+    price: f32,
+}
+
 type HmacSha256 = Hmac<Sha256>;
 
 fn format_request(path: &str, query: &str) -> String {
-    let uri = "https://api.binance.com/api/v3".to_string();
     let secret = match env::var("BINANCE_SECRET") {
         Ok(val) => val,
         Err(_) => panic!("BINANCE_SECRET env is not set"),
@@ -50,15 +60,15 @@ fn format_request(path: &str, query: &str) -> String {
     let result = mac.result();
     let code_bytes = result.code();
 
-    uri.to_string()
-        + path
+    path.to_string()
         + &"?".to_string()
         + &input
         + &"&signature=".to_string()
         + &hex::encode(code_bytes)
 }
 
-fn get_response(path: &str, query: &str) -> String {
+fn get_response(path: &str, query: &str, sign_request: bool) -> String {
+    let uri = "https://api.binance.com/api/v3".to_string();
     let mut headers = header::HeaderMap::new();
     let key = match env::var("BINANCE_KEY") {
         Ok(val) => val,
@@ -71,7 +81,7 @@ fn get_response(path: &str, query: &str) -> String {
         .build()
         .unwrap();
 
-    let url = format_request(path, query);
+    let url = if sign_request {uri + &format_request(path, query)} else {uri + &path};
     client.get(&url)
         .send()
         .unwrap()
@@ -80,7 +90,7 @@ fn get_response(path: &str, query: &str) -> String {
 }
 
 fn get_balances() -> Vec<Balance> {
-    let body = get_response("/account", "");
+    let body = get_response("/account", "", true);
     let res: BalancesRaw = serde_json::from_str(&body).unwrap();
 
     let mut balances: Vec<Balance> = vec![];
@@ -100,9 +110,29 @@ fn get_balances() -> Vec<Balance> {
     balances
 }
 
+fn get_tickers() -> Vec<Ticker> {
+    let body = get_response("/ticker/price", "", false);
+    let res: Vec<TickerRaw> = serde_json::from_str(&body).unwrap();
+
+    let mut tickers: Vec<Ticker> = vec![];
+    for d in res {
+        tickers.push(Ticker{
+            symbol: d.symbol,
+            price: d.price.parse::<f32>().unwrap(),
+        });
+    }
+
+    tickers
+}
+
 fn main() {
     let balances = get_balances();
     for b in balances {
+        println!("{:?}", b);
+    }
+
+    let tickers = get_tickers();
+    for b in tickers.into_iter() {
         println!("{:?}", b);
     }
 }
