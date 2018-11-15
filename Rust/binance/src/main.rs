@@ -93,36 +93,32 @@ fn get_balances() -> Vec<Balance> {
     let body = get_response("/account", "", true);
     let res: BalancesRaw = serde_json::from_str(&body).unwrap();
 
-    let mut balances: Vec<Balance> = vec![];
-    for d in res.balances {
-        let free = d.free.parse::<f32>().unwrap();
-        let locked = d.locked.parse::<f32>().unwrap();
+    res.balances
+        .iter()
+        .filter_map(|x| {
+            let free = x.free.parse::<f32>().unwrap();
+            let locked = x.locked.parse::<f32>().unwrap();
 
-        if free > 0.0 || locked > 0.0 {
-            balances.push(Balance{
-                asset: d.asset,
-                free: free,
-                locked: locked,
-            });
-        }
-    }
+            if free > 0.0 || locked > 0.0 {
+                return Some(Balance{asset: x.asset.clone(), free, locked});
+            }
 
-    balances
+            None
+        })
+        .collect::<Vec<Balance>>()
 }
 
 fn get_tickers() -> Vec<Ticker> {
     let body = get_response("/ticker/price", "", false);
     let res: Vec<TickerRaw> = serde_json::from_str(&body).unwrap();
 
-    let mut tickers: Vec<Ticker> = vec![];
-    for d in res {
-        tickers.push(Ticker{
-            symbol: d.symbol,
-            price: d.price.parse::<f32>().unwrap(),
-        });
-    }
-
-    tickers
+    res
+        .iter()
+        .map(|x| Ticker{
+            symbol: x.symbol.clone(),
+            price: x.price.parse::<f32>().unwrap(),
+        })
+        .collect::<Vec<Ticker>>()
 }
 
 fn main() {
