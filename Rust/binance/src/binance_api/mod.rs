@@ -18,8 +18,8 @@ pub struct Binance{
 
 #[derive(Debug)]
 pub struct Ticker{
-    symbol: String,
-    price: f32,
+    pub symbol: String,
+    pub price: f32,
 }
 #[derive(Debug)]
 pub struct Balance{
