@@ -18,10 +18,13 @@ impl<'a> Rates<'a> {
     }
 
     pub fn get_save_pair(&self, symbol: &str) -> Result<Pair, Error> {
-        let rows = self.conn.query("SELECT id, symbol FROM pair WHERE symbol = $1", &[&symbol])?;
+        let mut rows = self.conn.query("SELECT id, symbol FROM pair WHERE symbol = $1", &[&symbol])?;
         if rows.len() == 0 {
-            self.conn.query("INSERT INTO pair (symbol) VALUES ($1) RETURNING id", &[&symbol])?
+            rows = self.conn.query("INSERT INTO pair (symbol) VALUES ($1) RETURNING id", &[&symbol])?;
+            return Ok(Pair{symbol: symbol.to_string(), id: rows.get(0).get(0)});
         }
-        Ok(Pair{symbol: symbol.to_string(), id: 0})
+
+        let row = rows.get(0);
+        Ok(Pair{symbol: row.get(1), id: row.get(0)})
     }
 }
