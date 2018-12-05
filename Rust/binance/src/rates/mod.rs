@@ -1,6 +1,6 @@
 extern crate postgres;
 
-use postgres::{Connection};
+use postgres::{Connection, Error};
 
 pub struct Rates<'a> {
     conn: &'a Connection,
@@ -17,9 +17,11 @@ impl<'a> Rates<'a> {
         Rates{conn}
     }
 
-    pub fn get_save_pair(&self, symbol: &str) -> Result<Pair> {
-        let row = self.conn.query("SELECT id, symbol FROM pair WHERE symbol = $1", &[&symbol])?;
-        println!("{:?}", row);
+    pub fn get_save_pair(&self, symbol: &str) -> Result<Pair, Error> {
+        let rows = self.conn.query("SELECT id, symbol FROM pair WHERE symbol = $1", &[&symbol])?;
+        if rows.len() == 0 {
+            self.conn.query("INSERT INTO pair (symbol) VALUES ($1) RETURNING id", &[&symbol])?
+        }
         Ok(Pair{symbol: symbol.to_string(), id: 0})
     }
 }

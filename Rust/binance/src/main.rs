@@ -22,6 +22,7 @@ fn main() {
 
     let tickers = binance.get_tickers();
     for b in tickers.into_iter() {
-        rates.get_save_pair(&b.symbol);
+        let pair = rates.get_save_pair(&b.symbol);
+        println!("{:?}", pair);
     }
 }
