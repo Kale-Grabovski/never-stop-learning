@@ -7,6 +7,6 @@ CREATE TABLE pair (
 CREATE TABLE rate (
     id serial PRIMARY KEY,
     pair_id int REFERENCES pair(id),
-    rate numeric(18,10) NOT NULL,
+    rate real NOT NULL,
     created_at timestamp WITH TIME ZONE DEFAULT now() NOT NULL
 );

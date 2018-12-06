@@ -8,8 +8,8 @@ pub struct Rates<'a> {
 
 #[derive(Debug)]
 pub struct Pair {
-    symbol: String,
-    id: i32,
+    pub symbol: String,
+    pub id: i32,
 }
 
 impl<'a> Rates<'a> {
@@ -26,5 +26,10 @@ impl<'a> Rates<'a> {
 
         let row = rows.get(0);
         Ok(Pair{symbol: row.get(1), id: row.get(0)})
+    }
+
+    pub fn save_rate(&self, pair: &Pair, rate: f32) -> Result<(), Error> {
+        self.conn.execute("INSERT INTO rate (pair_id, rate) VALUES ($1, $2)", &[&pair.id, &rate])?;
+        Ok(())
     }
 }
