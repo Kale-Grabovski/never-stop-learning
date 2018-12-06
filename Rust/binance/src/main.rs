@@ -15,7 +15,7 @@ fn main() {
     let dsn = env::var("PGDSN").expect("PGDSN env is not set");
     let conn = Connection::connect(dsn, TlsMode::None).expect("Driver connection error");
     let rates = rates::Rates::new(&conn);
-    let dur = time::Duration::from_secs(30);
+    let dur = time::Duration::from_secs(60);
 
     loop {
         binance.get_tickers()
