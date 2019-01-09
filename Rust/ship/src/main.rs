@@ -1,43 +1,43 @@
-struct BattleField {
-	alien_ships: Vec<Ship>,
-	mine_ships: Vec<Ship>,
-	sea_width: u8,
-	sea_height: u8,
-}
+extern crate sdl2;
 
-impl BattleField {
-	pub fn new(w: u8, h: u8, aliens: Vec<Ship>, mine: Vec<Ship>) -> BattleField {
-        BattleField {
-        	sea_width: w,
-        	sea_height: h,
-        	alien_ships: aliens,
-        	mine_ships: mine,
-        }
-    }
-
-    pub fn display(&self) {
-    	for i in 0..self.sea_height {
-	    	for k in 0..self.sea_width {
-		        print!("□ ");
-		    }
-	    	println!("");
-    	}
-    }
-}
-
-struct Coord {
-	x: u8,
-	y: u8,
-}
-
-struct Ship {
-	size: u8,
-	coord: Coord,
-}
+use sdl2::pixels::Color;
+use sdl2::event::Event;
+use sdl2::keyboard::Keycode;
+use sdl2::render::Canvas;
+use std::time::Duration;
+use sdl2::video::Window;
+use sdl2::rect::Rect;
 
 fn main() {
-	let aliens = vec![];
-	let mine = vec![];
-	let field = BattleField::new(10, 10, aliens, mine);
-	field.display();
+	let sdl_context = sdl2::init().unwrap();
+	let video_subsystem = sdl_context.video().unwrap();
+	let window = video_subsystem.window("Ship", 800, 600).build().unwrap();
+
+	let mut canvas: Canvas<Window> = window.into_canvas()
+		.present_vsync()
+		.build().unwrap();
+
+	let mut event_pump = sdl_context.event_pump().unwrap();
+
+	'running: loop {
+		canvas.set_draw_color(Color::RGB(0, 0, 0));
+		canvas.clear();
+
+		canvas.set_draw_color(Color::RGB(255, 210, 0));
+		let _ = canvas.fill_rect(Rect::new(10, 10, 780, 580));
+
+		for event in event_pump.poll_iter() {
+			match event {
+				Event::Quit {..} |
+				Event::KeyDown { keycode: Some(Keycode::Escape), .. } => {
+					break 'running
+				},
+				_ => {}
+			}
+		}
+		// The rest of the game loop goes here...
+
+		canvas.present();
+		::std::thread::sleep(Duration::new(0, 1_000_000_000u32 / 60));
+	}
 }
