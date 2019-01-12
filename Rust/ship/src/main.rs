@@ -3,96 +3,129 @@ extern crate sdl2;
 use sdl2::pixels::Color;
 use sdl2::event::Event;
 use sdl2::keyboard::Keycode;
-use sdl2::render::Canvas;
 use std::time::Duration;
-use sdl2::video::Window;
-use sdl2::rect::Rect;
+use sdl2::video::{Window, WindowContext};
+use sdl2::rect::{Rect};
+use sdl2::render::{Canvas, Texture, TextureCreator};
 
-const CELL_SIZE: u32 = 25;
-const FIELD_START_X: i32 = 50;
-const FIELD_START_Y: i32 = 50;
+#[derive(Clone, Copy)]
+enum Cell {Alive, Injured, Dead, Empty, Dot}
 
-struct Game<'a> {
+struct Game<'a, 'b> {
 	canvas: &'a mut Canvas<Window>,
-	me: Field<'a>,
-	enemy: Field<'a>,
-    cell_size: u32,
-	fields_start_xy: [i32; 2],
+	tc: &'b TextureCreator<WindowContext>,
+	me: Vec<Cell>,
+	enemy: Vec<Cell>,
+	cell_size: u32,
+	xy: [i32; 2],
 }
 
-impl<'a> Game<'a> {
+impl<'a, 'b> Game<'a, 'b> {
 	pub fn new(
-		canvas: &mut Canvas<Window>,
+		canvas: &'a mut Canvas<Window>,
+		tc: &'b TextureCreator<WindowContext>,
 		cell_size: u32,
-		fields_start_xy: [i32; 2],
-	) -> Game {
+		xy: [i32; 2],
+	) -> Game<'a, 'b> {
+		let me = vec![Cell::Empty; 100];
+		let enemy = vec![Cell::Dot; 100];
 		Game {
 			canvas,
-            me: Field::new(canvas, false),
-			enemy: Field::new(canvas, true),
+            tc,
+			me,
+			enemy,
 			cell_size,
-			fields_start_xy,
+			xy,
 		}
 	}
 
-	pub fn draw(self) {
+	pub fn draw(&mut self) {
 		self.canvas.set_draw_color(Color::RGB(0, 0, 0));
 		self.canvas.clear();
 
-        self.me.draw();
-		self.enemy.draw();
-	}
-}
+		self.me[15] = Cell::Dead;
+		self.me[25] = Cell::Dead;
+		self.me[35] = Cell::Dead;
 
-enum Ship {Alive, Dead}
+		let me = self.draw_field(false);
+		let enemy = self.draw_field(true);
 
-#[derive(Clone, Copy)]
-enum Cell {Ship, Empty, Dot}
-
-struct Field<'a> {
-	canvas: &'a mut Canvas<Window>,
-	is_enemy: bool,
-	cells: &'a [Cell; 100],
-}
-
-impl<'a> Field<'a> {
-	pub fn new(canvas: &mut Canvas<Window>, is_enemy: bool) -> Field {
-        Field{
-			canvas,
-			is_enemy,
-			cells: &[Cell::Empty; 100],
-		}
-	}
-
-    pub fn draw(self) {
-		self.canvas.set_draw_color(Color::RGB(255, 210, 201));
-
-        for row in 0..11 {
-            let x = FIELD_START_X + (row * CELL_SIZE) as i32;
-			let _ = self.canvas.fill_rect(Rect::new(FIELD_START_X, x as i32, CELL_SIZE * 10, 1));
-		}
-
-		for col in 0..11 {
-			let y = FIELD_START_Y + (col * CELL_SIZE) as i32;
-			let _ = self.canvas.fill_rect(Rect::new(y as i32, FIELD_START_Y, 1, CELL_SIZE * 10));
-		}
+		let field_size = self.cell_size * 10 + 1;
+		self.canvas.copy(&me, None, Rect::new(self.xy[0], self.xy[1], field_size, field_size)).unwrap();
+		self.canvas.copy(&enemy, None, Rect::new(self.xy[0] + (field_size as i32) + 50, self.xy[1], field_size, field_size)).unwrap();
 
 		self.canvas.present();
+	}
+
+	fn draw_field(&mut self, is_enemy: bool) -> Texture<'b> {
+		let field_size = self.cell_size * 10 + 1;
+		let mut t: Texture = self.tc.create_texture_target(None, field_size, field_size).unwrap();
+
+		let cell_size = &self.cell_size;
+        let cells = match is_enemy {
+			true => &self.enemy,
+			false => &self.me,
+		};
+
+		self.canvas.with_texture_canvas(&mut t, |tc| {
+			tc.set_draw_color(Color::RGB(0, 0, 0));
+			tc.clear();
+
+			tc.set_draw_color(Color::RGB(200, 200, 200));
+			for row in 0..11 {
+				tc.fill_rect(Rect::new(0, (row * cell_size) as i32, cell_size * 10, 1));
+				tc.fill_rect(Rect::new((row * cell_size) as i32, 0, 1, cell_size * 10));
+			}
+
+			for (i, cell) in cells.iter().enumerate() {
+				let x = (i as u32 % 10 * cell_size) as i32;
+				let y = (i as u32 / 10 * cell_size) as i32;
+
+				match cell {
+					Cell::Dot => {
+						tc.set_draw_color(Color::RGB(255, 255, 255));
+						tc.draw_rect(Rect::new(
+							x + (cell_size / 2) as i32,
+							y + (cell_size / 2) as i32,
+							2,
+							2,
+						));
+					},
+					Cell::Alive => {
+						tc.set_draw_color(Color::RGB(255, 255, 255));
+						tc.fill_rect(Rect::new(x, y, cell_size + 0, cell_size + 0));
+					},
+					Cell::Injured => {
+						tc.set_draw_color(Color::RGB(0, 155, 155));
+						tc.fill_rect(Rect::new(x, y, cell_size + 0, cell_size + 0));
+					},
+					Cell::Dead => {
+						tc.set_draw_color(Color::RGB(215, 215, 0));
+						tc.fill_rect(Rect::new(x, y, cell_size + 0, cell_size + 0));
+					},
+                    _ => {},
+				}
+			}
+		});
+
+		t
 	}
 }
 
 fn main() {
 	let sdl_context = sdl2::init().unwrap();
 	let video_subsystem = sdl_context.video().unwrap();
-	let window = video_subsystem.window("Ship", 700, 350).build().unwrap();
+	let window = video_subsystem.window("Ship", 660, 350).build().unwrap();
 
 	let mut canvas: Canvas<Window> = window.into_canvas()
 		.present_vsync()
 		.build()
         .unwrap();
 
-	let mut event_pump = sdl_context.event_pump().unwrap();
-    let game = Game::new(&mut canvas, 25, [50, 50]);
+    let texture_creator : TextureCreator<_> = canvas.texture_creator();
+
+    let mut event_pump = sdl_context.event_pump().unwrap();
+    let mut game = Game::new(&mut canvas, &texture_creator, 25, [50, 50]);
 
 	'running: loop {
 		for event in event_pump.poll_iter() {
