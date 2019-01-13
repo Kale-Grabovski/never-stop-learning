@@ -5,3 +5,4 @@ authors = ["li <li>"]
 
 [dependencies]
 sdl2 = "*"
+rand = "*"
