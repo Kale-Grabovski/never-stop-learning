@@ -27,7 +27,7 @@ impl Cell {
 }
 
 #[derive(Copy, Clone, PartialEq)]
-enum State {Me, Enemy, Over}
+enum State {Me, Enemy, Won, Lost}
 
 struct Game<'a, 'b> {
 	canvas: &'a mut Canvas<Window>,
@@ -163,9 +163,9 @@ impl<'a, 'b> Game<'a, 'b> {
             let cell = rng.gen_range(0, 100);
 			match self.me[cell].state {
 				CellState::Alive => {
-					::std::thread::sleep(Duration::new(1, 0));
 					self.me[cell].state = CellState::Injured;
 					self.check_dead_ship(false, cell);
+					self.check_game_over();
 				},
 				CellState::Empty => {
 					self.me[cell].state = CellState::Miss;
@@ -175,6 +175,32 @@ impl<'a, 'b> Game<'a, 'b> {
 				_ => {},
 			}
 		}
+	}
+
+	fn check_game_over(&mut self) {
+        let mut alive = false;
+		for i in &self.me {
+            if i.state == CellState::Alive {
+                alive = true;
+                break;
+            }
+        }
+
+        if !alive {
+            return self.set_state(State::Lost);
+        }
+
+        alive = false;
+        for i in &self.enemy {
+            if i.state == CellState::Alive {
+                alive = true;
+                break;
+            }
+        }
+
+        if !alive {
+            return self.set_state(State::Won);
+        }
 	}
 
 	fn check_dead_ship(&mut self, is_enemy: bool, cell: usize) {
@@ -232,9 +258,10 @@ impl<'a, 'b> Game<'a, 'b> {
             CellState::Alive => {
 				self.enemy[cell].state = CellState::Injured;
 				self.check_dead_ship(true, cell);
+				self.check_game_over();
 			},
-			CellState::Injured | CellState::Dead => {},
-			_ => {
+			CellState::Injured | CellState::Dead | CellState::Miss => {},
+			CellState::Empty => {
 				self.enemy[cell].state = CellState::Miss;
 				self.set_state(State::Enemy);
 			},
@@ -325,10 +352,17 @@ fn main() {
 			}
 		}
 
-		if game.get_state() == State::Over {
-			println!("Over");
-			break;
-		}
+        match game.get_state() {
+            State::Won => {
+                println!("You won");
+                break;
+            },
+            State::Lost => {
+                println!("You lost");
+                break;
+            },
+            _ => {},
+        }
 
 		game.draw();
 
