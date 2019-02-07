@@ -11,6 +11,7 @@ https://go101.org - go book and articles
 
 DevOps
 https://habr.com/ru/company/southbridge/blog/317922/ - Deploy with Ansistrano (RU)
+https://m.habr.com/ru/company/piter/blog/343270/ (RU)
 
 Different
 https://m.habr.com/ru/post/128017/ - Maps memory organization (RU)
