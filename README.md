@@ -1,0 +1,16 @@
+# Hz
+
+Linux
+https://www.booleanworld.com/guide-linux-top-command/ - top command
+
+Databases
+http://www.interdb.jp/pg/ - Postgres internals
+
+Go
+https://go101.org - go book and articles
+
+DevOps
+https://habr.com/ru/company/southbridge/blog/317922/ - Deploy with Ansistrano (RU)
+
+Different
+https://m.habr.com/ru/post/128017/ - Maps memory organization (RU)
