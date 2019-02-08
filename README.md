@@ -8,6 +8,7 @@ http://www.interdb.jp/pg/ - Postgres internals
 
 Go
 https://go101.org/article/channel-use-cases.html - channels
+https://habr.com/ru/post/265833/ - GC (RU)
 
 DevOps
 https://habr.com/ru/company/southbridge/blog/317922/ - Deploy with Ansistrano (RU)
