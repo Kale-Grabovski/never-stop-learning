@@ -7,7 +7,7 @@ Databases
 http://www.interdb.jp/pg/ - Postgres internals
 
 Go
-https://go101.org - go book and articles
+https://go101.org/article/channel-use-cases.html - channels
 
 DevOps
 https://habr.com/ru/company/southbridge/blog/317922/ - Deploy with Ansistrano (RU)
