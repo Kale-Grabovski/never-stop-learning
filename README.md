@@ -16,3 +16,4 @@ https://m.habr.com/ru/company/piter/blog/343270/ (RU)
 
 Different
 https://m.habr.com/ru/post/128017/ - Maps memory organization (RU)
+https://www.sarulabs.com/post/2/2018-06-12/what-is-a-dependency-injection-container-and-why-use-one.html - DI
