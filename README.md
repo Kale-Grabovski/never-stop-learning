@@ -3,6 +3,7 @@
 ## Linux
 - https://www.booleanworld.com/guide-linux-top-command/ - top
 - https://shapeshed.com/unix-xargs/ - xargs
+- https://shapeshed.com/unix-ln/ - ln
 
 ## Databases
 - http://www.interdb.jp/pg/ - Postgres internals
