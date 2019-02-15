@@ -1,7 +1,8 @@
 # Hz
 
 ## Linux
-- https://www.booleanworld.com/guide-linux-top-command/ - top command
+- https://www.booleanworld.com/guide-linux-top-command/ - top
+- https://shapeshed.com/unix-xargs/ - xargs
 
 ## Databases
 - http://www.interdb.jp/pg/ - Postgres internals
