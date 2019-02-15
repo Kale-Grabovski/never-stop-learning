@@ -27,3 +27,21 @@ Check timestamp after couple of hours to be sure if it's working
 docker build -t linux_last_updated .
 docker run linux_last_updated cat /build_time
 ```
+
+## Build golang apps
+
+```
+git clone https://github.com/golang/example
+cd example/outyet
+docker build -t outyet .
+
+docker run --publish 8080:8080 --name outyet1 -d outyet
+curl localhost:8080
+```
+
+Or just copy Dockerfile instead of cloning repo:
+
+```
+FROM golang:onbuild
+EXPOSE 8080
+```

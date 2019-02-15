@@ -8,6 +8,7 @@ http://www.interdb.jp/pg/ - Postgres internals
 
 Go
 https://go101.org/article/channel-use-cases.html - channels
+https://hub.packtpub.com/concurrency-and-parallelism-in-golang-tutorial/ - concurrency/parallelism
 https://habr.com/ru/post/265833/ - GC (RU)
 
 DevOps
