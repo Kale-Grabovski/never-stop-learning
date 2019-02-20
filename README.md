@@ -12,6 +12,8 @@
 - https://go101.org/article/channel-use-cases.html - channels
 - https://hub.packtpub.com/concurrency-and-parallelism-in-golang-tutorial/ - concurrency/parallelism
 - https://habr.com/ru/post/265833/ - GC (RU)
+- https://medium.com/@leo_hetsch/local-development-with-go-postgresql-and-elasticsearch-in-docker-61bc8a0d5e66 - docker-compose + postgres + go
+
 
 ## DevOps
 - https://habr.com/ru/company/southbridge/blog/317922/ - Deploy with Ansistrano (RU)
