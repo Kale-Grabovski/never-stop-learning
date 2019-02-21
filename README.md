@@ -13,6 +13,7 @@
 - https://hub.packtpub.com/concurrency-and-parallelism-in-golang-tutorial/ - concurrency/parallelism
 - https://habr.com/ru/post/265833/ - GC (RU)
 - https://medium.com/@leo_hetsch/local-development-with-go-postgresql-and-elasticsearch-in-docker-61bc8a0d5e66 - docker-compose + postgres + go
+- https://coder.today/tech/2018-11-10_profiling-your-golang-app-in-3-steps/ - Profiling
 
 
 ## DevOps
