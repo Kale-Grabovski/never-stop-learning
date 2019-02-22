@@ -14,7 +14,7 @@
 - https://habr.com/ru/post/265833/ - GC (RU)
 - https://medium.com/@leo_hetsch/local-development-with-go-postgresql-and-elasticsearch-in-docker-61bc8a0d5e66 - docker-compose + postgres + go
 - https://coder.today/tech/2018-11-10_profiling-your-golang-app-in-3-steps/ - Profiling
-
+- https://www.calhoun.io/how-to-use-slice-capacity-and-length-in-go/ - arrays and slices
 
 ## DevOps
 - https://habr.com/ru/company/southbridge/blog/317922/ - Deploy with Ansistrano (RU)
@@ -23,3 +23,4 @@
 ## Shit
 - https://m.habr.com/ru/post/128017/ - Maps memory organization (RU)
 - https://www.sarulabs.com/post/2/2018-06-12/what-is-a-dependency-injection-container-and-why-use-one.html - DI
+
