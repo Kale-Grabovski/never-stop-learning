@@ -15,6 +15,7 @@
 - https://medium.com/@leo_hetsch/local-development-with-go-postgresql-and-elasticsearch-in-docker-61bc8a0d5e66 - docker-compose + postgres + go
 - https://coder.today/tech/2018-11-10_profiling-your-golang-app-in-3-steps/ - Profiling
 - https://www.calhoun.io/how-to-use-slice-capacity-and-length-in-go/ - arrays and slices
+- https://4gophers.ru/articles/rukovodstvo-po-nethttp-taimautam-v-go/#.XHgUZ88zbOQ - go http timeouts
 
 ## DevOps
 - https://habr.com/ru/company/southbridge/blog/317922/ - Deploy with Ansistrano (RU)
