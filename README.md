@@ -16,6 +16,7 @@
 - https://coder.today/tech/2018-11-10_profiling-your-golang-app-in-3-steps/ - Profiling
 - https://www.calhoun.io/how-to-use-slice-capacity-and-length-in-go/ - arrays and slices
 - https://4gophers.ru/articles/rukovodstvo-po-nethttp-taimautam-v-go/#.XHgUZ88zbOQ - go http timeouts
+- https://4gophers.ru/articles/https-i-go/#.XHgVV88zbOQ - https
 
 ## DevOps
 - https://habr.com/ru/company/southbridge/blog/317922/ - Deploy with Ansistrano (RU)
