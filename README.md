@@ -17,6 +17,7 @@
 - https://www.calhoun.io/how-to-use-slice-capacity-and-length-in-go/ - arrays and slices
 - https://4gophers.ru/articles/rukovodstvo-po-nethttp-taimautam-v-go/#.XHgUZ88zbOQ - go http timeouts
 - https://4gophers.ru/articles/https-i-go/#.XHgVV88zbOQ - https
+- https://morsmachine.dk/go-scheduler - scheduler
 
 ## DevOps
 - https://habr.com/ru/company/southbridge/blog/317922/ - Deploy with Ansistrano (RU)
@@ -25,4 +26,5 @@
 ## Shit
 - https://m.habr.com/ru/post/128017/ - Maps memory organization (RU)
 - https://www.sarulabs.com/post/2/2018-06-12/what-is-a-dependency-injection-container-and-why-use-one.html - DI
+- https://dotsandbrackets.com/application-secrets-ru/ - Vault (RU)
 
