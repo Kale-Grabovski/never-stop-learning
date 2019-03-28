@@ -7,6 +7,7 @@
 
 ## Databases
 - http://www.interdb.jp/pg/ - Postgres internals
+- https://blog.bigbinary.com/2016/01/23/configure-postgresql-to-allow-remote-connection.html - Postgres enable remote connections
 
 ## Go
 - https://go101.org/article/channel-use-cases.html - channels
@@ -22,3 +23,4 @@
 ## Shit
 - https://m.habr.com/ru/post/128017/ - Maps memory organization (RU)
 - https://www.sarulabs.com/post/2/2018-06-12/what-is-a-dependency-injection-container-and-why-use-one.html - DI
+- https://medium.com/@shijuvar/introducing-nats-to-go-developers-3cfcb98c21d0 - NATS at golang
