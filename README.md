@@ -8,6 +8,8 @@
 ## Databases
 - http://www.interdb.jp/pg/ - Postgres internals
 - https://blog.bigbinary.com/2016/01/23/configure-postgresql-to-allow-remote-connection.html - Postgres enable remote connections
+- https://eax.me/postgresql-logical-replication/ - pg replication (RU)
+- https://www.digitalocean.com/community/tutorials/how-to-set-up-logical-replication-with-postgresql-10-on-ubuntu-18-04 - pg replication
 
 ## Go
 - https://go101.org/article/channel-use-cases.html - channels
