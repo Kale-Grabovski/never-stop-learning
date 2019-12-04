@@ -39,12 +39,14 @@
 
 ## TCP
 https://docs.continuent.com/tungsten-clustering-6.0/performance-networking.html - sysctl settings tuning for TCP fast conns
+https://www.booleanworld.com/depth-guide-iptables-linux-firewall/ - iptables
 
 ## Paranoid
 https://github.com/AykutCevik/Geolocate-IP-Browser-Extension - GEO location firefox addon (shows country ISO of your IP)
 https://www.eff.org/privacybadger - firefox addon anti trackers
 https://github.com/dpacassi/disable-javascript - disable js
 https://privatevpnsupportguy.github.io/Setup%20a%20manual%20kill%20switch%20for%20OpenVPN%20in%20GNU%20Linux.html - VPN killswitch with ufw
+https://thetinhat.com/tutorials/darknets/i2p-server-router-setup-guide.html - i2p node setup
 
 ## Shit
 - https://m.habr.com/ru/post/128017/ - Maps memory organization (RU)
@@ -52,3 +54,14 @@ https://privatevpnsupportguy.github.io/Setup%20a%20manual%20kill%20switch%20for%
 - https://medium.com/@shijuvar/introducing-nats-to-go-developers-3cfcb98c21d0 - NATS at golang
 - https://dotsandbrackets.com/application-secrets-ru/ - Vault (RU)
 
+
+# Gestures
+gesture swipe left 2 xdotool key alt+Right
+gesture swipe right 2 xdotool key alt+Left
+gesture swipe up 3 xdotool key shift+alt+Down
+gesture swipe down 3 xdotool key super+d
+gesture pinch in xdotool key ctrl+minus
+gesture pinch out xdotool key ctrl+plus
+gesture swipe up 4 xdotool key ctrl+w
+gesture swipe left 3 xdotool key ctrl+Page_Down
+gesture swipe right 3 xdotool key ctrl+Page_Up
