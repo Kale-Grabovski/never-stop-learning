@@ -1,0 +1,40 @@
+# Radare2
+
+r2 -Aw shit # run with write mode and analyzed
+rabin2 -I shit # info
+s main # seek main
+pdf # disas main
+s 0x0303 # seek by addr
+wa je 0x3f3f # patch
+wx 90 90 # hex nops
+iz # strings
+axt @@ str.* # find data/code references to this address
+afl # Analyze Functions List
+VV / p / P # modes
+iI # info, instead of running rabin2 -I
+iz # show strings info
+ie # find entry point
+iM # main func
+is # show symbols
+axt 0x004007d2 # find references
+
+
+# GDB / gef
+start
+uf _start # start func list
+vmmap # memory layout
+xinfo $sp # SP info
+telescope $esp l30 # stack content
+dps $pc l1 # dereference command
+
+# payload
+file shit # get file type
+ldd shit # list library dependencies of binary
+grep ELF * # find ELF shit
+xxd shit # hex dump
+dd skip=52 count=64 if=shit of=shot bs=1 # read 64 bytes, skipping first 52
+readelf -h shit # reading ELF file header, or whole file without -h flag
+nm -D --demangle shit # getting symbols from binary
+echo $? # dump exit status of previously run binary
+strings shit # dump strings from binary
+objdump -d shit # dump hex , -s flag to print text section

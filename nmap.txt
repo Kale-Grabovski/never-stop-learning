@@ -1,0 +1,10 @@
+-O # OS detection
+-sS # Stealth scan means without ACK
+-sV # Service detection
+p- # 1-65535 ports
+p 80,443 # two ports
+p 1-100 # range
+T1 # slow scan speed
+T5 # fast speed (noisy)
+
+nmap 172.16.54.0/24 -sP # ping subnet
