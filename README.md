@@ -56,6 +56,8 @@ https://thetinhat.com/tutorials/darknets/i2p-server-router-setup-guide.html - i2
 
 
 # Gestures
+
+```
 gesture swipe left 2 xdotool key alt+Right
 gesture swipe right 2 xdotool key alt+Left
 gesture swipe up 3 xdotool key shift+alt+Down
@@ -65,3 +67,4 @@ gesture pinch out xdotool key ctrl+plus
 gesture swipe up 4 xdotool key ctrl+w
 gesture swipe left 3 xdotool key ctrl+Page_Down
 gesture swipe right 3 xdotool key ctrl+Page_Up
+```
