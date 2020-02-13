@@ -68,3 +68,13 @@ gesture swipe up 4 xdotool key ctrl+w
 gesture swipe left 3 xdotool key ctrl+Page_Down
 gesture swipe right 3 xdotool key ctrl+Page_Up
 ```
+
+
+# Linux shit
+
+Backup with date and autoremove old backups:
+
+```
+47 3,15 * * * pg_dump db --use-set-session-authorization | bzip2 > /var/lib/postgresql/backups/backup-$(date +\%Y-\%m-\%d_\%H00).sql.bz2
+46 * * * * find /var/lib/postgresql/backups -mtime +7 -exec rm {} \;
+```
