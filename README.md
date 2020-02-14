@@ -15,6 +15,7 @@
 - https://github.com/Percona-Lab/clickhousedb_fdw - clickhousedb_fdw
 - http://blog.rubypdf.com/2019/04/22/how-to-compile-and-install-clickhousedb_fdw/ - ClickHouse fdw install
 - https://www.cybertec-postgresql.com/en/index-your-foreign-key/ - fk indices
+- http://blog.untrod.com/2016/08/actually-understanding-timezones-in-postgresql.html - postgres timezone types explained
 
 ## Go
 - https://go101.org/article/channel-use-cases.html - channels
