@@ -80,13 +80,16 @@ Backup with date and autoremove old backups:
 46 * * * * find /var/lib/postgresql/backups -mtime +7 -exec rm {} \;
 ```
 
-# Server tune checklist
+# Server tune shit-checklist
 
 - Add private key, disable pwd auth and root auth
   $ sudo service sshd restart
 - Disable root login (set nologin at /etc/passwd for root)
 - Set timezone at php.ini, postgresql.conf and server
+
+```
   sudo timedatectl set-timezone UTC
   sudo vim /etc/php/7.2/fpm/php.ini
   sudo vim /etc/postgresql/12/main/postgresql.conf
+```
 
