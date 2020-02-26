@@ -1,4 +1,6 @@
--- Generates random string of passed length
+-- Generates random string of passed length.
+-- Possible characters: [A-Za-z0-9]
+-- Example: SELECT rand_string(16); -> nFtJoToluihDo2u7
 CREATE FUNCTION rand_string(_len integer) RETURNS text LANGUAGE plpgsql
 AS
 $$
