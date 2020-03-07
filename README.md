@@ -56,6 +56,10 @@
 - https://medium.com/@shijuvar/introducing-nats-to-go-developers-3cfcb98c21d0 - NATS at golang
 - https://dotsandbrackets.com/application-secrets-ru/ - Vault (RU)
 
+## Frontend
+https://createapp.dev/ - webpack/parcel build tool
+https://config.coach/ - another tool
+
 
 # Gestures
 
