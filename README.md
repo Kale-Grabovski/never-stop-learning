@@ -59,6 +59,7 @@
 ## Frontend
 https://createapp.dev/ - webpack/parcel build tool
 https://config.coach/ - another tool
+https://jonathanmh.com/webpack-sass-scss-compiling-separate-file/ - compile SASS into separate file with Webpack
 
 
 # Gestures
