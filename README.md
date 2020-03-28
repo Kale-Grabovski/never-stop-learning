@@ -62,7 +62,7 @@
 - https://jonathanmh.com/webpack-sass-scss-compiling-separate-file/ - compile SASS into separate file with Webpack
 
 
-# Gestures
+# Gestures (sudo apt-get install xdotool wmctrl && vim ~/.config/libinput-gestures.conf)
 
 ```
 gesture swipe left 2 xdotool key alt+Right
