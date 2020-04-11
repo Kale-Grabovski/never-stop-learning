@@ -17,6 +17,7 @@
 - https://www.cybertec-postgresql.com/en/index-your-foreign-key/ - fk indices
 - http://blog.untrod.com/2016/08/actually-understanding-timezones-in-postgresql.html - postgres timezone types explained
 - http://pgconfigurator.cybertec.at/ - pg configurator
+- https://habr.com/ru/post/268983/ - window functions pg
 
 ## Go
 - https://go101.org/article/channel-use-cases.html - channels
