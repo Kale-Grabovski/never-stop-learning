@@ -30,6 +30,9 @@
 - https://4gophers.ru/articles/https-i-go/#.XHgVV88zbOQ - https
 - https://morsmachine.dk/go-scheduler - scheduler
 
+## Message brokers - AMQP, MQTT and shit
+- https://medium.com/@philipfeng/modern-open-source-messaging-apache-kafka-rabbitmq-nats-pulsar-and-nsq-ca3bf7422db5
+
 ## DevOps
 - https://habr.com/ru/company/southbridge/blog/317922/ - Deploy with Ansistrano (RU)
 - https://m.habr.com/ru/company/piter/blog/343270/ (RU)
