@@ -31,7 +31,7 @@
 - https://morsmachine.dk/go-scheduler - scheduler
 
 ## Message brokers - AMQP, MQTT and shit
-- https://medium.com/@philipfeng/modern-open-source-messaging-apache-kafka-rabbitmq-nats-pulsar-and-nsq-ca3bf7422db5
+- https://medium.com/@philipfeng/modern-open-source-messaging-apache-kafka-rabbitmq-nats-pulsar-and-nsq-ca3bf7422db5 - nats, rabbitmq, kafka, nsq comparison
 
 ## DevOps
 - https://habr.com/ru/company/southbridge/blog/317922/ - Deploy with Ansistrano (RU)
