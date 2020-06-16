@@ -125,6 +125,13 @@ psql
 create database dddddb;
 create user uuuuser with encrypted password 'pwd';
 grant all privileges on database dddddb to uuuuser;
+
+# add shit to /etc/postgresql/12/main/pg_hba.conf
+host    all             uuuuser              0.0.0.0/0                       md5
+host    all             uuuuser              ::/0                            md5
+
+# change listen at /etc/postgresql/12/main/postgresql.conf
+listen_addresses = '*'
 ```
 
 
