@@ -132,6 +132,8 @@ host    all             uuuuser              ::/0                            md5
 
 # change listen at /etc/postgresql/12/main/postgresql.conf
 listen_addresses = '*'
+
+sudo service postgresql restart
 ```
 
 
