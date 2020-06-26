@@ -44,6 +44,7 @@
 - https://www.digitalocean.com/community/tutorials/how-to-install-elasticsearch-logstash-and-kibana-elastic-stack-on-ubuntu-18-04 - elk
 - https://www.fosslinux.com/6084/how-to-install-elk-stack-on-ubuntu-18-04.htm - elk (do not use ssl conf, see above link)
 - https://serveradmin.ru/kubernetes-ustanovka/ - Kubernetes
+- https://bestmonitoringtools.com/how-to-install-zabbix-server-on-ubuntu/ - install zabbix
 
 ## TCP
 - https://docs.continuent.com/tungsten-clustering-6.0/performance-networking.html - sysctl settings tuning for TCP fast conns
