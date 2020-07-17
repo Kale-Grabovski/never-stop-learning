@@ -19,6 +19,7 @@
 - http://pgconfigurator.cybertec.at/ - pg configurator
 - https://habr.com/ru/post/268983/ - window functions pg
 - https://blog.opstree.com/2019/04/16/redis-best-practices-and-performance-tuning/ - redis tuning
+- https://pgtune.leopard.in.ua - !!!pg tune configurator!!!
 
 ## Go
 - https://go101.org/article/channel-use-cases.html - channels
