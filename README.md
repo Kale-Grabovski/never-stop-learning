@@ -60,8 +60,9 @@
 - https://privatevpnsupportguy.github.io/Setup%20a%20manual%20kill%20switch%20for%20OpenVPN%20in%20GNU%20Linux.html - VPN killswitch with ufw
 - https://thetinhat.com/tutorials/darknets/i2p-server-router-setup-guide.html - i2p node setup
 
-## Mamkin xakep
+## Mamkin cool xakep
 - https://habr.com/ru/company/dataart/blog/419677/ - sniff https mobile app traffic from PC
+- https://xakep.ru/2018/03/19/android-frida/ - realtime code injection at mobile app with Frida
 
 ## Shit
 - https://m.habr.com/ru/post/128017/ - Maps memory organization (RU)
