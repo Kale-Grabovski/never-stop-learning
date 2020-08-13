@@ -31,6 +31,7 @@
 - https://4gophers.ru/articles/rukovodstvo-po-nethttp-taimautam-v-go/#.XHgUZ88zbOQ - go http timeouts
 - https://4gophers.ru/articles/https-i-go/#.XHgVV88zbOQ - https
 - https://morsmachine.dk/go-scheduler - scheduler
+- https://blog.maddevs.io/go-rest-%D0%B8%D0%BB%D0%B8-grpc-f5d52d7ffff6 - grpc
 
 ## Message brokers - AMQP, MQTT and shit
 - https://medium.com/@philipfeng/modern-open-source-messaging-apache-kafka-rabbitmq-nats-pulsar-and-nsq-ca3bf7422db5 - nats, rabbitmq, kafka, nsq comparison
