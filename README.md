@@ -61,6 +61,7 @@
 - https://github.com/dpacassi/disable-javascript - disable js
 - https://privatevpnsupportguy.github.io/Setup%20a%20manual%20kill%20switch%20for%20OpenVPN%20in%20GNU%20Linux.html - VPN killswitch with ufw
 - https://thetinhat.com/tutorials/darknets/i2p-server-router-setup-guide.html - i2p node setup
+- https://www.fosslinux.com/4137/how-to-fix-dns-leak-issue-with-openvpn-in-ubuntu.htm - dns leak
 
 ## Mamkin cool xakep
 - https://habr.com/ru/company/dataart/blog/419677/ - sniff https mobile app traffic from PC
