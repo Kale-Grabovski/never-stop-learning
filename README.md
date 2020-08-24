@@ -34,6 +34,7 @@
 - https://blog.maddevs.io/go-rest-%D0%B8%D0%BB%D0%B8-grpc-f5d52d7ffff6 - grpc
 - https://itnext.io/practical-guide-to-securing-grpc-connections-with-go-and-tls-part-1-f63058e9d6d1 - grpc tls
 - https://dev.to/techschoolguru/use-grpc-interceptor-for-authorization-with-jwt-1c5h - grpc and jwt
+- https://medium.com/monstar-lab-bangladesh-engineering/jwt-auth-in-go-part-2-refresh-tokens-d334777ca8a0 - auth/refresh tokens
 
 ## Message brokers - AMQP, MQTT and shit
 - https://medium.com/@philipfeng/modern-open-source-messaging-apache-kafka-rabbitmq-nats-pulsar-and-nsq-ca3bf7422db5 - nats, rabbitmq, kafka, nsq comparison
