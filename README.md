@@ -149,4 +149,11 @@ listen_addresses = '*'
 sudo service postgresql restart
 ```
 
+## Download latest file from folder by SSH
+
+```
+rsync -av login@host:/var/lib/postgresql/backups/$(ssh login@host 'ls -t /var/lib/postgresql/backups/ | head -1') /home/user/backups/
+```
+
+
 
