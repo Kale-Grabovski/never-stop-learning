@@ -51,6 +51,8 @@
 - https://serveradmin.ru/kubernetes-ustanovka/ - Kubernetes
 - https://bestmonitoringtools.com/how-to-install-zabbix-server-on-ubuntu/ - install zabbix-server
 - https://tecadmin.net/install-zabbix-agent-on-centos-rhel/ - install zabbix-agent
+- https://dotsandbrackets.com/kubernetes-example-ru/ - k8s couple of words (RU)
+- https://darkfess.ru/microk8s-kompose-helm/ - microk8s/kompose/helm and shit
 
 ## TCP
 - https://docs.continuent.com/tungsten-clustering-6.0/performance-networking.html - sysctl settings tuning for TCP fast conns
