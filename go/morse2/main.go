@@ -80,16 +80,19 @@ func DecodeMorse(morseCode string) string {
 func getSpeed(bits string) int {
 	speed := 9999999
 	can := 0
+	prev := int32(bits[0])
 	for _, c := range bits {
-		if c == '0' {
+		if c == prev {
 			can++
 		} else {
 			if can > 0 && can < speed {
 				speed = can
 			}
-			can = 0
+			can = 1
 		}
+		prev = c
 	}
+
 	if can > 0 && can < speed {
 		speed = can
 	}
@@ -97,17 +100,12 @@ func getSpeed(bits string) int {
 }
 
 func DecodeBits(bits string) string {
-	speed := getSpeed(bits)
-
 	bits = strings.Trim(bits, "0")
 	if bits == "" {
 		return ""
 	}
 
-	if speed == 0 {
-		return strings.Repeat(". ", len(bits))
-	}
-
+	speed := getSpeed(bits)
 	prev := int32(bits[0])
 	c := 0
 
@@ -142,6 +140,7 @@ func DecodeBits(bits string) string {
 
 func main() {
 	fmt.Println(DecodeMorse(DecodeBits("1100110011001100000011000000111111001100111111001111110000000000000011001111110011111100111111000000110011001111110000001111110011001100000011")))
+	fmt.Println(DecodeBits("1100110011001100000011000000111111001100111111001111110000000000000011001111110011111100111111000000110011001111110000001111110011001100000011"))
 	fmt.Println(DecodeMorse(DecodeBits("11")))
-	fmt.Println(DecodeMorse(DecodeBits("1")))
+	fmt.Println(DecodeMorse(DecodeBits("10001")))
 }
