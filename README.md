@@ -58,6 +58,7 @@
 - https://docs.continuent.com/tungsten-clustering-6.0/performance-networking.html - sysctl settings tuning for TCP fast conns
 - https://www.booleanworld.com/depth-guide-iptables-linux-firewall/ - iptables
 - https://habr.com/ru/post/108691/ - ipset
+- https://imagineer.in/blog/docker-container-dns-issue-in-airgapped-network/ - DNS shit docker vpn
 
 ## Paranoid
 - https://github.com/AykutCevik/Geolocate-IP-Browser-Extension - GEO location firefox addon (shows country ISO of your IP)
