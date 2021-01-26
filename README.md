@@ -4,6 +4,7 @@
 - https://www.booleanworld.com/guide-linux-top-command/ - top
 - https://shapeshed.com/unix-xargs/ - xargs
 - https://shapeshed.com/unix-ln/ - ln
+- https://www.howtogeek.com/howto/ubuntu/keyboard-shortcuts-for-bash-command-shell-for-ubuntu-debian-suse-redhat-linux-etc/ - terminal shortcuts
 
 ## Databases
 - http://www.interdb.jp/pg/ - Postgres internals
@@ -67,6 +68,7 @@
 - https://privatevpnsupportguy.github.io/Setup%20a%20manual%20kill%20switch%20for%20OpenVPN%20in%20GNU%20Linux.html - VPN killswitch with ufw
 - https://thetinhat.com/tutorials/darknets/i2p-server-router-setup-guide.html - i2p node setup
 - https://www.fosslinux.com/4137/how-to-fix-dns-leak-issue-with-openvpn-in-ubuntu.htm - dns leak
+- https://github.com/jonathanio/update-systemd-resolved - VPN buscl shit and resolvconf shit (also install dnsmasq)
 
 ## Mamkin cool xakep
 - https://habr.com/ru/company/dataart/blog/419677/ - sniff https mobile app traffic from PC
