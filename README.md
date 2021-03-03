@@ -1,5 +1,10 @@
 # Hz
 
+## Nginx etc
+https://serverfault.com/questions/1003364/nginx-500-24-too-many-open-files - overcome "too many open files at nginx" . systemctl edit --full nginx.service
+ and add LimitNOFILE=500000
+
+
 ## Linux
 - https://www.booleanworld.com/guide-linux-top-command/ - top
 - https://shapeshed.com/unix-xargs/ - xargs
@@ -65,7 +70,7 @@
 - https://github.com/AykutCevik/Geolocate-IP-Browser-Extension - GEO location firefox addon (shows country ISO of your IP)
 - https://www.eff.org/privacybadger - firefox addon anti trackers
 - https://github.com/dpacassi/disable-javascript - disable js
-- https://privatevpnsupportguy.github.io/Setup%20a%20manual%20kill%20switch%20for%20OpenVPN%20in%20GNU%20Linux.html - VPN killswitch with ufw
+#- https://privatevpnsupportguy.github.io/Setup%20a%20manual%20kill%20switch%20for%20OpenVPN%20in%20GNU%20Linux.html - VPN killswitch with ufw
 - https://thetinhat.com/tutorials/darknets/i2p-server-router-setup-guide.html - i2p node setup
 - https://www.fosslinux.com/4137/how-to-fix-dns-leak-issue-with-openvpn-in-ubuntu.htm - dns leak
 - https://github.com/jonathanio/update-systemd-resolved - VPN buscl shit and resolvconf shit (also install dnsmasq)
